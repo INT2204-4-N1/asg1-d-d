@@ -2,7 +2,7 @@ package dictionary;
 
 
 
-public class DictionaryCommandline {
+public class DictionaryCommandline{
     public void showAllWords()
     {
         Dictionary dict = new Dictionary();
