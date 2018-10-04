@@ -9,11 +9,10 @@ public class DictionaryManagement {
         Scanner sc = new Scanner(System.in);
         Dictionary dic = new Dictionary();
 
-        dic.n = Integer.parseInt(sc.nextLine());
-        for (int i = 0; i < dic.n; i++) {
-            dic.words[i] = new Word();
-            dic.words[i].word_target = sc.nextLine();
-            dic.words[i].word_explain = sc.nextLine();
+        for (int i = 0; i < dic.DS.size(); i++) {
+            //dic.DS.get(i) = new Word();
+            dic.DS.get(i).word_target = sc.nextLine();
+            dic.DS.get(i).word_explain = sc.nextLine();
         }
         sc.close();
     }
