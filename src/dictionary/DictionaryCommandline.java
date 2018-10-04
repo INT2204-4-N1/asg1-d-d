@@ -1,16 +1,14 @@
 package dictionary;
-
-
-
-public class DictionaryCommandline {
+public class
+DictionaryCommandline {
     public void showAllWords()
     {
         Dictionary dict = new Dictionary();
         System.out.println("No  |English        |VietNam    ");
 
-        for(int i=0;  dict.words[i]!=null ;i++)
+        for(int i=0;  i< dict.DS.size();i++)
         {
-            System.out.println((i+1)+"  |"+dict.words[i].word_target+"        |"+dict.words[i].word_explain);
+            System.out.println((i+1)+"  |"+dict.DS.get(i).word_target+"        |"+dict.DS.get(i).word_explain);
         }
 
     }
