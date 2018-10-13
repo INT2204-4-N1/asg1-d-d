@@ -1,4 +1,7 @@
 package dictionary;
+/**
+ * Class Giao diện
+ */
 
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -7,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
-//import java.awt.event.ActionListener;
+import java.awt.event.ActionListener;
 
 public class Display extends JFrame implements ActionListener {
     JTextField Input;
@@ -15,7 +18,6 @@ public class Display extends JFrame implements ActionListener {
     JButton Translate,Add,Delete,b4,Sound,Repair;
     JLabel english,vietnamese, Title;
     JPanel pn,pn1,pn2;
-    static boolean anhViet = true;
     private Border raisedBevel = BorderFactory.createRaisedBevelBorder();
     public Display()
     {
@@ -29,11 +31,11 @@ public class Display extends JFrame implements ActionListener {
         Input.setBounds(20,70,170,30);
 
         Output = new JTextArea();
-        Output.setBounds(290,70,400,500);
+        Output.setBounds(290,110,400,450);
         Output.setFocusable(false);
 
         Output2 = new JTextArea();
-        Output2.setBounds(20,120,170,450);
+        Output2.setBounds(20,110,170,450);
         Output2.setFocusable(false);
 
 
@@ -83,7 +85,29 @@ public class Display extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void actionPerformed(ActionEvent arg){
+    public void actionPerformed(ActionEvent ds){
+        if(ds.getSource()== Add)
+        {
+            String tthem= Input.getText().toString();
+            String inputValue = JOptionPane.showInputDialog("Please input a value");
+            //Output2.setText( tthem+" " + inputValue);
+        }
+        if(ds.getSource()==Delete)
+        {
+            String xoa= Input.getText().toString();
+
+
+
+        }
+        if(ds.getSource()==Repair)
+        {
+            String thay= Input.getText().toString();
+        }
+        if(ds.getSource()==Sound)
+        {
+            
+        }
+
 
     }
 
