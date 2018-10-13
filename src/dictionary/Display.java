@@ -12,7 +12,7 @@ import javax.swing.border.Border;
 public class Display extends JFrame implements ActionListener {
     JTextField Input;
     JTextArea Output , Output2;
-    JButton Translate,Add,Delete,b4;
+    JButton Translate,Add,Delete,b4,Sound,Repair;
     JLabel english,vietnamese, Title;
     JPanel pn,pn1,pn2;
     static boolean anhViet = true;
@@ -39,11 +39,20 @@ public class Display extends JFrame implements ActionListener {
 
         Add = new JButton("Add");
         Add.setBackground(Color.gray);
-        Add.setBounds(200,110,70,30);
+        Add.setBounds(200,110,80,30);
 
         Delete = new JButton("Delete");
         Delete.setBackground(Color.gray);
-        Delete.setBounds(200,150,70,30);
+        Delete.setBounds(200,150,80,30);
+
+        Sound = new JButton("Sound");
+        Sound.setBackground(Color.gray);
+        Sound.setBounds(200,230,80,30);
+
+        Repair = new JButton("Repair");
+        Repair.setBounds(200,190,80,30);
+        Repair.setBackground(Color.gray);
+
         english = new JLabel("Anh");
         vietnamese = new JLabel("Việt");
 
@@ -65,7 +74,7 @@ public class Display extends JFrame implements ActionListener {
         pn.setLayout(null);
         pn.setBackground(new Color(191, 239, 255));
         pn.add(Input); pn.add(Output);pn.add(Output2); pn.add(Add);pn.add(Delete); pn.add(b4);
-        pn.add(english);pn.add(vietnamese);pn.add(Title);
+        pn.add(english);pn.add(vietnamese);pn.add(Title);pn.add(Repair);pn.add(Sound);
         add(pn);
         setSize(600,650);
         setLocation(400,50);
