@@ -1,6 +1,7 @@
 package dictionary;
 
-public class Main {
+
+public class main {
     public static void main(String[] abc){
          Display_data dd = new Display_data();
         // InsertWord iw = new InsertWord();
@@ -11,3 +12,4 @@ public class Main {
         //Display dl = new Display();
     }
 }
+
