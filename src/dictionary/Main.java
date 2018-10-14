@@ -1,7 +1,7 @@
 package dictionary;
 
 
-public class Run {
+public class Main {
     public static void main(String[] abc){
        // Display_data dd = new Display_data();
         // InsertWord iw = new InsertWord();
