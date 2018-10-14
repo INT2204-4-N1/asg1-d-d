@@ -5,6 +5,9 @@ import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 //import java.awt.event.ActionListener;
@@ -12,7 +15,7 @@ import javax.swing.border.Border;
 public class Display extends JFrame implements ActionListener {
     JTextField Input;
     JTextArea Output , Output2;
-    JButton Translate,Add,Delete,b4,Sound,Repair;
+    JButton Translate,Add,Delete,b4,Sound,Repair , Search;
     JLabel english,vietnamese, Title;
     JPanel pn,pn1,pn2;
     static boolean anhViet = true;
@@ -21,7 +24,7 @@ public class Display extends JFrame implements ActionListener {
     {
         super("DICTIONARY");
         Title = new JLabel("DICTIONARY");
-        Title.setBounds(290,0,200,70);
+        Title.setBounds(180,0,200,70);
         Title.setBackground(Color.blue);
         Title.setFont(new Font("Tahoma",Font.PLAIN,22));
 
@@ -29,11 +32,11 @@ public class Display extends JFrame implements ActionListener {
         Input.setBounds(20,70,170,30);
 
         Output = new JTextArea();
-        Output.setBounds(290,70,400,500);
+        Output.setBounds(290,110,400,450);
         Output.setFocusable(false);
 
         Output2 = new JTextArea();
-        Output2.setBounds(20,120,170,450);
+        Output2.setBounds(20,110,170,450);
         Output2.setFocusable(false);
 
 
@@ -65,7 +68,6 @@ public class Display extends JFrame implements ActionListener {
         b4.setBounds(70,45,70,20);
         b4.setFont(new Font("Tahoma",Font.PLAIN,14));
 
-        // Translate.addActionListener(this);
         Add.addActionListener(this);
         Delete.addActionListener(this);
         b4.addActionListener(this);
@@ -84,7 +86,45 @@ public class Display extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent arg){
+       // Connection conn = JDBC_connect.getConnection();
+
+        if(arg.getSource() == Add){ // thêm từ mới vào từ điển.
+            Connection conn = JDBC_connect.getConnection();
+            //String them = Input.getText().toString();
+            String them = JOptionPane.showInputDialog("New Word");
+            String nghia = JOptionPane.showInputDialog("Mean");
+            String sql = "insert into tbl_edict(word , detail) values(?,?)";
+            // truyền thông tin vào đối tượng PreparedStatement
+            try {
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, them);
+                ps.setString(2 , nghia);
+
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        if(arg.getSource() == Delete){
+            Connection conn = JDBC_connect.getConnection();
+            String word = Input.getText().toString();
+            int click = JOptionPane.showConfirmDialog(null,"Are You Sure" , "Question" , JOptionPane.YES_NO_OPTION);
+            if(click == JOptionPane.YES_OPTION) {
+
+                String sql = "delete from tbl_edict where word = ?";
+                try {
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setString(1, word);
+                    ps.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
     }
+
+
 
 }

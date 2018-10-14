@@ -1,39 +1,45 @@
 package dictionary;
 
+import jdk.internal.util.xml.impl.Input;
+
+import java.awt.*;
+import java.beans.EventHandler;
 import java.sql.*;
 import java.util.Scanner;
+import java.awt.event.KeyEvent ;
 
 /**
  * class hiển thị thông tin của database
  */
 public class Display_data {
 
-    Scanner sc = new Scanner(System.in);
+    Display dl = new Display();
 
-    public void Display(){
+    public void Output_search() {
         Connection conn = JDBC_connect.getConnection();
         String sql = "select * from tbl_edict";
-        System.out.println("nhập từ cần tìm");
-        String newWord = sc.nextLine();
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+        String search = dl.Input.getText().toString();
 
-            // khởi tạo resultset
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+                try {
+                    PreparedStatement ps = conn.prepareStatement(sql);
 
-                String word = rs.getString("word");
-                String tail = rs.getString("detail");
+                    // khởi tạo resultset
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
 
-                if(newWord.equals(word)){
-                    System.out.println(word+"   "+ tail);
+                        String word = rs.getString("word");
+                        String tail = rs.getString("detail");
+
+                        if (search.equals(word)) {
+                            dl.Output.setText(tail);
+                        }
+                    }
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
 
-}
