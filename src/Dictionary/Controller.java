@@ -5,11 +5,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
+import javafx.scene.web.WebView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javax.swing.*;
 import java.net.URL;
 import java.sql.*;
@@ -17,8 +20,10 @@ import java.util.ResourceBundle;
 
 
 public class Controller implements Initializable {
-
-
+    private static String typeOfDictionary = "av";
+    private PreparedStatement preparedStatement = null;
+    private Connection conn = JDBC_Connection.getConnection();
+    private ResultSet rs = null;
     @FXML
     private AnchorPane root;
     @FXML
@@ -26,21 +31,21 @@ public class Controller implements Initializable {
     @FXML
     private ObservableList<String> items = FXCollections.observableArrayList();
     @FXML
-    private TextField input;
-
+    private TextField textField;
     @FXML
-    private Button add;
+    private WebView webView;
     @FXML
-    private Button delete;
+    private Button Add;
     @FXML
-    private Button repair;
+    private Button Delete;
     @FXML
-    private Button sound;
+    private Button Repair;
+    @FXML
+    private Button Sound;
     @Override
     public void initialize(URL Location , ResourceBundle resourceBundle)
     {
         list.setItems(items);
-        Connection conn = JDBC_Connection.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select word from tbl_edict");
@@ -84,6 +89,36 @@ public class Controller implements Initializable {
         }
 
     }
+    public void SearchButtonEvent(KeyEvent event) throws SQLException {
+        String query = "Select * from " + typeOfDictionary + " WHERE word=?";
+        preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setString(1, textField.getText());
+        rs = preparedStatement.executeQuery();
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            String text = textField.getText();
+            if ("".equals(text)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("THÔNG BÁO");
+                alert.setHeaderText("                      TỪ CHƯA ĐƯỢC NHẬP!");
+                alert.setContentText("*WARNING: FBI");
+                alert.show();
+            } else if (list.getSelectionModel().getSelectedItem() == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("THÔNG BÁO");
+                alert.setHeaderText("                      TỪ KHÔNG HỢP LỆ!");
+                alert.setContentText("*WARNING: FBI");
+                alert.show();
+            } else {
+                while (rs.next()) {
+                    webView.getEngine().loadContent(rs.getString("html"));
+                    System.out.println(rs.getString("html"));
+                }
+                preparedStatement.close();
+                rs.close();
+            }
+        }
+    }
+
 
 
 }
