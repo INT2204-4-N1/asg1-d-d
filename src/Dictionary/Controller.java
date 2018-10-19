@@ -5,9 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import javax.swing.*;
@@ -22,12 +20,18 @@ public class Controller implements Initializable {
     @FXML
     private AnchorPane root;
     @FXML
+    private TextArea textArea;
+    @FXML
     private ListView<String> list = new ListView<>() ;
     @FXML
     private ObservableList<String> items = FXCollections.observableArrayList();
     @FXML
-    private TextField input;
-
+    private TextField textField;
+    @FXML
+    private ScrollPane scrollPane;
+//    @FXML
+//    private WebView webView;
+//     private WebEngine engine;
     @FXML
     private Button add;
     @FXML
@@ -36,6 +40,8 @@ public class Controller implements Initializable {
     private Button repair;
     @FXML
     private Button sound;
+    @FXML
+    private Button search;
     @Override
     public void initialize(URL Location , ResourceBundle resourceBundle)
     {
@@ -53,6 +59,44 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
+//    public void show(ActionEvent event){
+//        mean();
+//
+//
+//    }
+//    public void showMean(){
+//        String text = textField.getText();
+//        webview_Show ws = new webview_Show();
+//        ws.mean(text , scrollPane);
+//    }
+    public void mean(ActionEvent event) {
+        String moiNhap = textField.getText();
+        String tu, nghia;
+        Connection conn = JDBC_Connection.getConnection();
+        String sql = "select * from tbl_edict";
+        try {
+            PreparedStatement ptmt = conn.prepareStatement(sql);
+            ResultSet rs = ptmt.executeQuery();
+            while (rs.next()) {
+                tu = rs.getString("word");
+                nghia = rs.getString("detail");
+                if (moiNhap.equals(tu)) {
+                    textArea.setText(nghia);
+                }
+
+            }
+
+//            if(moiNhap == tu )
+//            {
+//                engine.loadContent(nghia);
+//            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 
 
