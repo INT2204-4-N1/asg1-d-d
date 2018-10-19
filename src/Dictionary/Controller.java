@@ -5,7 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -19,6 +22,7 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
 
+//    private static final ApplyImports AlertDialog = ;
     @FXML
     private AnchorPane root;
     @FXML
@@ -108,7 +112,7 @@ public class Controller implements Initializable {
                 JOptionPane.showMessageDialog(null, "added successfully !");
                 textField.requestFocus();
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -133,6 +137,27 @@ public class Controller implements Initializable {
                         e.printStackTrace();
                     }
                 }
+    }
+
+    public void repairWord(){
+        Connection conn = JDBC_Connection.getConnection();
+        String sql = "Update tbl_edict set word = ? where detail = ?";
+        try {
+            PreparedStatement ptmt = conn.prepareStatement(sql);
+            String newWord = textField.getText();
+            String newDetail = textArea.getText();
+
+            ptmt.setString(1 , newWord);
+            ptmt.setString(2 , newDetail);
+            int kt = ptmt.executeUpdate();
+            if(kt != 0){
+                JOptionPane.showMessageDialog(null, "Repair successfully !");
+                textField.requestFocus();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
