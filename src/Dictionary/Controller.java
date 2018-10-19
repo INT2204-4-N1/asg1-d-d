@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 import javax.swing.*;
@@ -28,11 +30,6 @@ public class Controller implements Initializable {
     @FXML
     private TextField textField;
     @FXML
-    private ScrollPane scrollPane;
-//    @FXML
-//    private WebView webView;
-//     private WebEngine engine;
-    @FXML
     private Button add;
     @FXML
     private Button delete;
@@ -40,8 +37,7 @@ public class Controller implements Initializable {
     private Button repair;
     @FXML
     private Button sound;
-    @FXML
-    private Button search;
+
     @Override
     public void initialize(URL Location , ResourceBundle resourceBundle)
     {
@@ -59,58 +55,45 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
-//    public void show(ActionEvent event){
-//        mean();
-//
-//
-//    }
-//    public void showMean(){
-//        String text = textField.getText();
-//        webview_Show ws = new webview_Show();
-//        ws.mean(text , scrollPane);
-//    }
-    public void mean(ActionEvent event) {
-        String moiNhap = textField.getText();
-        String tu, nghia;
-        Connection conn = JDBC_Connection.getConnection();
-        String sql = "select * from tbl_edict";
-        try {
-            PreparedStatement ptmt = conn.prepareStatement(sql);
-            ResultSet rs = ptmt.executeQuery();
-            while (rs.next()) {
-                tu = rs.getString("word");
-                nghia = rs.getString("detail");
-                if (moiNhap.equals(tu)) {
-                    textArea.setText(nghia);
+
+    public void mean(KeyEvent event) {
+        String moiNhap = textField.getText().trim();
+        if(event.getCode() == KeyCode.ENTER) {
+            Connection conn = JDBC_Connection.getConnection();
+            int i = 0;
+            String sql = "select * from tbl_edict";
+            try {
+                PreparedStatement ptmt = conn.prepareStatement(sql);
+                ResultSet rs = ptmt.executeQuery();
+                while (rs.next()) {
+
+                    if (moiNhap.equals(rs.getString("word"))) {
+                        String nghia = rs.getString("detail");
+                        String var1 = nghia.replaceAll("<C><F><I><N><Q>", "\n       ");
+                        String var2 = var1.replaceAll("<br />", "\n      ");
+                        String var3 = var2.replaceAll("</Q></N></I></F></C>", " ");
+                        String var4 = var3.replace("=", "+");
+                        textArea.setText(var4);
+                        i = 1;
+                    }
+                }
+                if (i == 0) {
+                    JOptionPane.showMessageDialog(null, "This word doesn't inside my Dictionary");
+                    textField.requestFocus();
                 }
 
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
-//            if(moiNhap == tu )
-//            {
-//                engine.loadContent(nghia);
-//            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
     }
 
 
 
-
-
     public void addWord(ActionEvent event){
-      //  Connection conn = JDBC_Connection.getConnection();
-     //   TextInputDialog dialog = new TextInputDialog();
-     //   dialog.setTitle("Add New Word");
-     //   dialog.setContentText("New Word");
-     //   Optional<String> them = dialog.showAndWait();
-    //    TextInputDialog dialog2 = new TextInputDialog();
-    //    dialog2.setTitle("Add Mean");
-     //   dialog2.setContentText("Mean");
-     //   Optional<String> nghia = dialog2.showAndWait();
+
         String them = JOptionPane.showInputDialog("New Word");
         String nghia = JOptionPane.showInputDialog("Mean ");
         Connection conn = JDBC_Connection.getConnection();
@@ -120,13 +103,36 @@ public class Controller implements Initializable {
             ps.setString(1, them);
             ps.setString(2, nghia);
 
-            ps.executeUpdate();
-
-
+            int kt =ps.executeUpdate();
+            if(kt != 0){
+                JOptionPane.showMessageDialog(null, "added successfully !");
+                textField.requestFocus();
+            }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+    }
+    public void deleteWord(){
+        Connection conn = JDBC_Connection.getConnection();
+        String word = textField.getText().toString();
+        int click = JOptionPane.showConfirmDialog(null , "Are you sure" , "Question" , JOptionPane.YES_NO_OPTION);
+                if(click == JOptionPane.YES_OPTION){
+                    String sql = "delete from tbl_edict where word = ?";
+                    try {
+                        PreparedStatement ptmt = conn.prepareStatement(sql);
+                        ptmt.setString(1,word);
+                       int kt =  ptmt.executeUpdate();
+                       if(kt != 0){
+                           JOptionPane.showMessageDialog(null, "delete successfully !");
+                           textField.requestFocus();
+                       }
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
     }
 
 
