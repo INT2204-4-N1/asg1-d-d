@@ -2,8 +2,10 @@
   <library name="controlsfx-8.40.14">
     <CLASSES>
       <root url="jar://D:/Desktop/Xuân Dũng/controlsfx-8.40.14.jar!/" />
+      <root url="file://E:/Downloads/marytts-5.2/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <jarDirectory url="file://E:/Downloads/marytts-5.2/lib" recursive="false" />
   </library>
 </component>
