@@ -14,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -159,7 +160,13 @@ public class Controller implements Initializable {
         }
 
     }
+    public void speak(ActionEvent event) throws IOException{
+        if (event.getSource() == sound) {
+            String str = (String) list.getSelectionModel().getSelectedItem();
+            String str1 = textField.getText();
 
 
+        }
 
+    }
 }

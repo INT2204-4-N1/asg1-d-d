@@ -17,7 +17,9 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        //launch(args);
+        TextToSpeak ds= new TextToSpeak();
+        ds.speak("Hello",2.0f,false,false);
+
 
     }
 }
