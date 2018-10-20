@@ -17,13 +17,12 @@ import marytts.exceptions.SynthesisException;
 import marytts.modules.synthesis.Voice;
 import marytts.signalproc.effects.AudioEffect;
 import marytts.signalproc.effects.AudioEffects;
-import marytts.util.data.audio.AudioPlayer;
 
 /**
  * @author GOXR3PLUS
  *
  */
-public class Audio {
+public class TextToSpeak {
 
     private AudioPlayer tts;
     private MaryInterface marytts;
@@ -31,7 +30,7 @@ public class Audio {
     /**
      * Constructor
      */
-    public Audio() {
+    public TextToSpeak() {
         try {
             marytts = new LocalMaryInterface();
 
@@ -67,7 +66,7 @@ public class Audio {
             // used has to be initiated every time
             tts = new AudioPlayer();
             tts.setAudio(audio);
-            tts.setgain(gainValue);
+            tts.setGain(gainValue);
             tts.setDaemon(daemon);
             tts.start();
             if (join)
