@@ -14,5 +14,23 @@
     <orderEntry type="library" exported="" name="controlsfx-samples-8.40.14" level="project" />
     <orderEntry type="library" exported="" name="controlsfx-8.40.14" level="project" />
     <orderEntry type="library" exported="" name="lib" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/Downloads/jl1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/Downloads/sqlite-jdbc-3.23.1 (1).jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
