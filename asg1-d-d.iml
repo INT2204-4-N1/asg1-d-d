@@ -7,20 +7,32 @@
     </content>
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="mysql-connector-java-5.1.47-bin" level="project" />
-    <orderEntry type="library" exported="" name="mysql-connector-java-5.1.47" level="project" />
-    <orderEntry type="library" exported="" name="controlsfx-samples-8.40.14" level="project" />
-    <orderEntry type="library" exported="" name="controlsfx-8.40.14" level="project" />
-    <orderEntry type="library" exported="" name="sqlite-jdbc-3.23.1" level="project" />
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://D:/Desktop/Xuân Dũng/jl1.0.jar!/" />
+          <root url="jar://E:/Downloads/jl1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="jl1.0" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/Downloads/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47-bin.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/Downloads/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

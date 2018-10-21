@@ -1,5 +1,7 @@
 package Dictionary;
 
+import GoogleAPI.Audio;
+import GoogleAPI.Language;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,8 +18,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javazoom.jl.decoder.JavaLayerException;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -144,34 +149,15 @@ public void repair_Key(ActionEvent event) throws Exception
         e.printStackTrace();
     }
 }
-//    public void repairWord(ActionEvent event){
-//        Connection conn = JDBC_Connection.getConnection();
-//        String sql = "Update tbl_edict set word = ? where detail = ?";
-//        try {
-//            PreparedStatement ptmt = conn.prepareStatement(sql);
-//           // String newDetail = textArea.getPromptText();
-//            String newWord = textField.getText();
-//           String newDetail = textArea.getText();
-//
-//            ptmt.setString(1 , newWord);
-//            ptmt.setString(2 , newDetail);
-//            int kt = ptmt.executeUpdate();
-//            if(kt != 0){
-//                JOptionPane.showMessageDialog(null, "Repair successfully !");
-//                textField.requestFocus();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-//    public void speak(ActionEvent event) throws IOException{
-//        if (event.getSource() == sound) {
-//            String str = (String) list.getSelectionModel().getSelectedItem();
-//            String str1 = textField.getText();
-//
-//
-//        }
-
-   // }
+    public void soundWord(ActionEvent event) throws JavaLayerException {
+        String read = textField.getText();
+        Audio audio = Audio.getInstance();
+        InputStream sound = null;
+        try {
+            sound = audio.getAudio(read, Language.ENGLISH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+            audio.play(sound);
+    }
 }
