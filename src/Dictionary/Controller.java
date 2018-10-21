@@ -160,13 +160,42 @@ public class Controller implements Initializable {
         }
 
     }
-    public void speak(ActionEvent event) throws IOException{
-        if (event.getSource() == sound) {
-            String str = (String) list.getSelectionModel().getSelectedItem();
-            String str1 = textField.getText();
+    /*public void speak() throws IOException, InterruptedException {
+        String str = search.getText();
+        if ("".equals(str)) str = (String) list.getSelectionModel().getSelectedItem();
 
-
+        //kiểm tra xem đã chọn từ nào hay chưa
+        if (listView.getSelectionModel().getSelectedItem() == null & search.getText().equals("")) {
+            alertNotSelected();
+        } else if (InternetConnected.IsConnecting()) {
+            if (!"".equals(str)) {
+                InputStream sound;
+                Audio audio;
+                if (this.checkTypeDictionary) {
+                    try {
+                        audio = Audio.getInstance();
+                        sound = audio.getAudio(str, "en");
+                        audio.play(sound);
+                    } catch (IOException var8) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, (String) null, var8);
+                    } catch (JavaLayerException var9) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, (String) null, var9);
+                    }
+                } else {
+                    try {
+                        audio = Audio.getInstance();
+                        sound = audio.getAudio(str, "vi");
+                        audio.play(sound);
+                    } catch (IOException var6) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, (String) null, var6);
+                    } catch (JavaLayerException var7) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, (String) null, var7);
+                    }
+                }
+            }
+        } else {
+            alertNotInternet();
         }
 
-    }
+    }*/
 }
