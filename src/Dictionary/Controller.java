@@ -1,5 +1,7 @@
 package Dictionary;
 
+import GoogleAPI.GoogleAPI.Audio;
+import GoogleAPI.GoogleAPI.Language;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,9 +14,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javazoom.jl.decoder.JavaLayerException;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -140,16 +145,18 @@ public class Controller implements Initializable {
                 }
     }
 
-    public void repairWord(){
+    public void repairWord(ActionEvent event){
         Connection conn = JDBC_Connection.getConnection();
+        String repair = JOptionPane.showInputDialog("Repair Detail");
         String sql = "Update tbl_edict set word = ? where detail = ?";
         try {
             PreparedStatement ptmt = conn.prepareStatement(sql);
+            String newDetail = repair;
             String newWord = textField.getText();
-            String newDetail = textArea.getText();
 
-            ptmt.setString(1 , newWord);
             ptmt.setString(2 , newDetail);
+            ptmt.setString(1 , newWord);
+            //ptmt.setString(2 , newDetail);
             int kt = ptmt.executeUpdate();
             if(kt != 0){
                 JOptionPane.showMessageDialog(null, "Repair successfully !");
@@ -160,42 +167,19 @@ public class Controller implements Initializable {
         }
 
     }
-    /*public void speak() throws IOException, InterruptedException {
-        String str = search.getText();
-        if ("".equals(str)) str = (String) list.getSelectionModel().getSelectedItem();
-
-        //kiểm tra xem đã chọn từ nào hay chưa
-        if (listView.getSelectionModel().getSelectedItem() == null & search.getText().equals("")) {
-            alertNotSelected();
-        } else if (InternetConnected.IsConnecting()) {
-            if (!"".equals(str)) {
-                InputStream sound;
-                Audio audio;
-                if (this.checkTypeDictionary) {
-                    try {
-                        audio = Audio.getInstance();
-                        sound = audio.getAudio(str, "en");
-                        audio.play(sound);
-                    } catch (IOException var8) {
-                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, (String) null, var8);
-                    } catch (JavaLayerException var9) {
-                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, (String) null, var9);
-                    }
-                } else {
-                    try {
-                        audio = Audio.getInstance();
-                        sound = audio.getAudio(str, "vi");
-                        audio.play(sound);
-                    } catch (IOException var6) {
-                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, (String) null, var6);
-                    } catch (JavaLayerException var7) {
-                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, (String) null, var7);
-                    }
-                }
-            }
-        } else {
-            alertNotInternet();
+    public void soundWord(ActionEvent event){
+        String read = textField.getText();
+        Audio audio = Audio.getInstance();
+        InputStream sound = null;
+        try {
+            sound = audio.getAudio(read, Language.ENGLISH);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-    }*/
+        try {
+            audio.play(sound);
+        } catch (JavaLayerException e) {
+            e.printStackTrace();
+        }
+    }
 }
