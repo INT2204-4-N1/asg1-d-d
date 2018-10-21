@@ -4,7 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -12,9 +15,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import javax.swing.*;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -96,30 +99,20 @@ public class Controller implements Initializable {
     }
 
 
+    public void addWord_Key (ActionEvent event) throws Exception{
 
-    public void addWord(ActionEvent event){
-
-        String them = JOptionPane.showInputDialog("New Word");
-        String nghia = JOptionPane.showInputDialog("Mean ");
-        Connection conn = JDBC_Connection.getConnection();
-        String sql = "insert into tbl_edict(word,detail) values(?,?)";
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, them);
-            ps.setString(2, nghia);
-
-            int kt =ps.executeUpdate();
-            if(kt != 0){
-                JOptionPane.showMessageDialog(null, "added successfully !");
-                textField.requestFocus();
-            }
-
-        } catch (SQLException e) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample2.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch(Exception e) {
             e.printStackTrace();
         }
 
     }
-    public void deleteWord(){
+    public void deleteWord(ActionEvent event){
         Connection conn = JDBC_Connection.getConnection();
         String word = textField.getText().toString();
         int click = JOptionPane.showConfirmDialog(null , "Are you sure" , "Question" , JOptionPane.YES_NO_OPTION);
@@ -139,34 +132,46 @@ public class Controller implements Initializable {
                     }
                 }
     }
-
-    public void repairWord(){
-        Connection conn = JDBC_Connection.getConnection();
-        String sql = "Update tbl_edict set word = ? where detail = ?";
-        try {
-            PreparedStatement ptmt = conn.prepareStatement(sql);
-            String newWord = textField.getText();
-            String newDetail = textArea.getText();
-
-            ptmt.setString(1 , newWord);
-            ptmt.setString(2 , newDetail);
-            int kt = ptmt.executeUpdate();
-            if(kt != 0){
-                JOptionPane.showMessageDialog(null, "Repair successfully !");
-                textField.requestFocus();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+public void repair_Key(ActionEvent event) throws Exception
+{
+    try {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample3.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.show();
+    } catch(Exception e) {
+        e.printStackTrace();
     }
-    public void speak(ActionEvent event) throws IOException{
-        if (event.getSource() == sound) {
-            String str = (String) list.getSelectionModel().getSelectedItem();
-            String str1 = textField.getText();
+}
+//    public void repairWord(ActionEvent event){
+//        Connection conn = JDBC_Connection.getConnection();
+//        String sql = "Update tbl_edict set word = ? where detail = ?";
+//        try {
+//            PreparedStatement ptmt = conn.prepareStatement(sql);
+//           // String newDetail = textArea.getPromptText();
+//            String newWord = textField.getText();
+//           String newDetail = textArea.getText();
+//
+//            ptmt.setString(1 , newWord);
+//            ptmt.setString(2 , newDetail);
+//            int kt = ptmt.executeUpdate();
+//            if(kt != 0){
+//                JOptionPane.showMessageDialog(null, "Repair successfully !");
+//                textField.requestFocus();
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+//    public void speak(ActionEvent event) throws IOException{
+//        if (event.getSource() == sound) {
+//            String str = (String) list.getSelectionModel().getSelectedItem();
+//            String str1 = textField.getText();
+//
+//
+//        }
 
-
-        }
-
-    }
+   // }
 }

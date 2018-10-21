@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package GoogleAPI.GoogleAPI;
+package GoogleAPI;
 
 import java.util.HashMap;
 
@@ -76,7 +76,7 @@ public class Language {
     private static Language language;
     private HashMap<String, String> hashLanguage = new HashMap();
 
-    private Language() {
+    public Language() {
         this.init();
     }
 

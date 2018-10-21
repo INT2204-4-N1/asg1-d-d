@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package GoogleAPI.GoogleAPI.text;
+package GoogleAPI.text;
 
 public class Text {
     private String text;

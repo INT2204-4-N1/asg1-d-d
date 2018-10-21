@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="controlsfx-8.40.14">
+  <library name="sqlite-jdbc-3.23.1">
     <CLASSES>
-      <root url="jar://D:/Desktop/Xuân Dũng/controlsfx-8.40.14.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.23.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

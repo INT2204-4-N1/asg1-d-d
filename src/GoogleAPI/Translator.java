@@ -3,13 +3,13 @@
 // (powered by Fernflower decompiler)
 //
 
-package GoogleAPI.GoogleAPI;
+package GoogleAPI;
 
-import GoogleAPI.GoogleAPI.parsing.Parse;
-import GoogleAPI.GoogleAPI.parsing.ParseTextDetect;
-import GoogleAPI.GoogleAPI.parsing.ParseTextTranslate;
-import GoogleAPI.GoogleAPI.text.Text;
-import GoogleAPI.GoogleAPI.text.TextTranslate;
+import GoogleAPI.parsing.Parse;
+import GoogleAPI.parsing.ParseTextDetect;
+import GoogleAPI.parsing.ParseTextTranslate;
+import GoogleAPI.text.Text;
+import GoogleAPI.text.TextTranslate;
 
 public class Translator {
     private static Translator translator;

@@ -3,10 +3,11 @@
 // (powered by Fernflower decompiler)
 //
 
-package GoogleAPI.GoogleAPI.parsing;
+package GoogleAPI.parsing;
 
-import GoogleAPI.GoogleAPI.text.Text;
-import GoogleAPI.GoogleAPI.utils.WebUtils;
+
+import GoogleAPI.text.Text;
+import GoogleAPI.utils.WebUtils;
 
 public class ParseTextDetect implements Parse {
     private StringBuilder url;

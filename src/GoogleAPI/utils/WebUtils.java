@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package GoogleAPI.GoogleAPI.utils;
+package GoogleAPI.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
