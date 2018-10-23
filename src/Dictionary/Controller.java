@@ -1,5 +1,7 @@
 package Dictionary;
 
+import GoogleAPI.Audio;
+import GoogleAPI.Language;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +15,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javazoom.jl.decoder.JavaLayerException;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -162,4 +167,19 @@ public static Stage stageRepair;
         e.printStackTrace();
     }
 }
+    public void soundWord(ActionEvent event){
+        String read = textField.getText();
+        Audio audio = Audio.getInstance();
+        InputStream sound = null;
+        try {
+            sound = audio.getAudio(read, Language.ENGLISH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            audio.play(sound);
+        } catch (JavaLayerException e) {
+            e.printStackTrace();
+        }
+    }
 }
