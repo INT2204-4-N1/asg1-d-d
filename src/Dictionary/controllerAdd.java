@@ -33,6 +33,7 @@ public class controllerAdd {
                 JOptionPane.showMessageDialog(null, "added successfully !");
                 textField.requestFocus();
             }
+            Controller.stageAdd.close();
 
         } catch (SQLException e) {
             e.printStackTrace();

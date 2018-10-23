@@ -56,24 +56,27 @@ public class controllerRepair {
             }
         }
     }
+
     public void repairWord(ActionEvent event){
 
         Connection conn = JDBC_Connection.getConnection();
-        String sql = "Update tbl_edict set word = ? where detail = ?";
+        String sql = "update tbl_edict set detail =? where word = ?";
+        String tu = textField1.getText();
+        String nghia = textArea1.getText();
         try {
             PreparedStatement ptmt = conn.prepareStatement(sql);
-//            String newWord = textField1.getText();
-//            String newDetail = textArea1.getText();
 
-
-            ptmt.setString(1 , textField1.getText());
-            ptmt.setString(2 , textArea1.getText());
+            ptmt.setString(2 , tu);
+            ptmt.setString(1 , nghia);
 
             int kt = ptmt.executeUpdate();
+            ptmt.close();
+            conn.close();
             if(kt != 0){
                 JOptionPane.showMessageDialog(null, "Repair successfully !");
                 textField1.requestFocus();
             }
+            Controller.stageRepair.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

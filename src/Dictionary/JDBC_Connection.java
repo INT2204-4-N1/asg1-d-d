@@ -8,7 +8,7 @@ public class JDBC_Connection {
     public static Connection getConnection(){
         final String url = "jdbc:mysql://localhost:3306/dictionaries_2?verifyServerCertificate=false&useSSL=true";
         final String user = "root";
-        final String password = "duong84488";
+        final String password = "dung99";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try {

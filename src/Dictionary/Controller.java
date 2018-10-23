@@ -1,11 +1,8 @@
 package Dictionary;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,23 +15,26 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import javax.swing.*;
-import java.net.URL;
-import java.sql.*;
-import java.util.ResourceBundle;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 
-public class Controller implements Initializable {
+public class Controller  {
+
+public static Stage stageAdd;
+public static Stage stageTran;
+public static Stage stageRepair;
 
 
-//    private static final ApplyImports AlertDialog = ;
     @FXML
     private AnchorPane root;
     @FXML
     private TextArea textArea;
     @FXML
     private ListView<String> list = new ListView<>() ;
-    @FXML
-    private ObservableList<String> items = FXCollections.observableArrayList();
     @FXML
     private TextField textField;
     @FXML
@@ -45,24 +45,30 @@ public class Controller implements Initializable {
     private Button repair;
     @FXML
     private Button sound;
+    @FXML
+    private Button ggtranslate;
 
-    @Override
-    public void initialize(URL Location , ResourceBundle resourceBundle)
-    {
-        list.setItems(items);
+    public void Search(KeyEvent event){
         Connection conn = JDBC_Connection.getConnection();
+        ArrayList<String> arrayList = new ArrayList<>();
+        String sql = "select word from tbl_edict";
+        String tuNhap = textField.getText();
         try {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select word from tbl_edict");
-            while (rs.next())
-            {
-                items.add(rs.getString(1));
+            PreparedStatement ptmt = conn.prepareStatement(sql);
+            ResultSet rs = ptmt.executeQuery();
+            while (rs.next()){
+                String goiY = rs.getString("word");
+                if(goiY.startsWith(tuNhap)){
+                    arrayList.add(goiY);
+                }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        list.getItems().setAll(arrayList);
     }
+
 
     public void mean(KeyEvent event) {
         String moiNhap = textField.getText().trim();
@@ -104,9 +110,9 @@ public class Controller implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample2.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.show();
+            stageAdd = new Stage();
+            stageAdd.setScene(new Scene(root1));
+            stageAdd.show();
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -132,46 +138,28 @@ public class Controller implements Initializable {
                     }
                 }
     }
-public void repair_Key(ActionEvent event) throws Exception
-{
+    public void repair_Key(ActionEvent event) throws Exception
+    {
     try {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample3.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
-        stage.show();
+         stageRepair= new Stage();
+        stageRepair.setScene(new Scene(root1));
+        stageRepair.show();
+    } catch(Exception e) {
+        e.printStackTrace();
+    }
+
+}
+    public void googleTraslate(ActionEvent event){
+    try {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample4.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        stageTran = new Stage();
+        stageTran.setScene(new Scene(root1));
+        stageTran.show();
     } catch(Exception e) {
         e.printStackTrace();
     }
 }
-//    public void repairWord(ActionEvent event){
-//        Connection conn = JDBC_Connection.getConnection();
-//        String sql = "Update tbl_edict set word = ? where detail = ?";
-//        try {
-//            PreparedStatement ptmt = conn.prepareStatement(sql);
-//           // String newDetail = textArea.getPromptText();
-//            String newWord = textField.getText();
-//           String newDetail = textArea.getText();
-//
-//            ptmt.setString(1 , newWord);
-//            ptmt.setString(2 , newDetail);
-//            int kt = ptmt.executeUpdate();
-//            if(kt != 0){
-//                JOptionPane.showMessageDialog(null, "Repair successfully !");
-//                textField.requestFocus();
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-//    public void speak(ActionEvent event) throws IOException{
-//        if (event.getSource() == sound) {
-//            String str = (String) list.getSelectionModel().getSelectedItem();
-//            String str1 = textField.getText();
-//
-//
-//        }
-
-   // }
 }
