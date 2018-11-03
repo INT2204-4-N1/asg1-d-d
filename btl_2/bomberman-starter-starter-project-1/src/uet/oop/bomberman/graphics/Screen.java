@@ -5,8 +5,6 @@ import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
 
-import java.awt.*;
-
 /**
  * Xử lý render cho tất cả Entity và một số màn hình phụ ra Game Panel
  */
