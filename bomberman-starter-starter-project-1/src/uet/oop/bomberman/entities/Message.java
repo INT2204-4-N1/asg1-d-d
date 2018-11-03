@@ -2,6 +2,8 @@ package uet.oop.bomberman.entities;
 
 import uet.oop.bomberman.graphics.Screen;
 
+import java.awt.*;
+
 /**
  * Hiển thị thông điệp
  */

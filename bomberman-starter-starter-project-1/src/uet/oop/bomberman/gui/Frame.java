@@ -2,6 +2,9 @@ package uet.oop.bomberman.gui;
 
 import uet.oop.bomberman.Game;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Swing Frame chứa toàn bộ các component
  */
