@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities.bomb;
 
+import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.graphics.Screen;
@@ -9,6 +10,7 @@ import uet.oop.bomberman.graphics.Sprite;
 public class FlameSegment extends Entity {
 
 	protected boolean _last ;
+	protected Board _board;
 
 	/**
 	 *

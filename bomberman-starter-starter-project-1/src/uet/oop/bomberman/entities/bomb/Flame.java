@@ -28,6 +28,7 @@ public class Flame extends Entity {
 		_direction = direction;
 		_radius = radius;
 		_board = board;
+		//_flameSegments = new FlameSegment[calculatePermitedDistance()];
 		createFlameSegments();
 	}
 
@@ -43,11 +44,12 @@ public class Flame extends Entity {
 		/**
 		 * biến last dùng để đánh dấu cho segment cuối cùng
 		 */
-		boolean last ;
+		boolean last = false;
 
 		// TODO: tạo các segment dưới đây
-		int x = (int)_x , y = (int)_y;
-		for(int i=0;i<_flameSegments.length;i++){
+		int x = (int)_x ;
+		int y = (int)_y;
+		for(int i=0; i<_flameSegments.length;i++){
 			last = i == _flameSegments.length -1 ? true : false;
 			switch (_direction){
 				case 0:
@@ -83,9 +85,14 @@ public class Flame extends Entity {
 			if(entity instanceof Character){
 				++radius;
 			}
-			if(entity.collide(this) == false){
+//			if(entity instanceof Wall){
+//				break;
+//			}
+
+			 if(entity.collide(this) == false){
 				break;
 			}
+
 			++radius;
 		}
 
