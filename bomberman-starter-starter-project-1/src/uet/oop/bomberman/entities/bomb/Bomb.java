@@ -109,7 +109,7 @@ public class Bomb extends AnimatedEntitiy {
 		if(e instanceof Bomber){
 			double dx = e.getX() - Coordinates.tileToPixel(this.getX());// tọa độ của bomber - tọa độ của bom sau khi đặt
 			double dy = e.getY() - Coordinates.tileToPixel(this.getY());
-			if(!(-16<=dx && dx <= 16 && 0 <= dy && dy <= 32 )){
+			if(!(-16<=dx && dx < 16 && 0<= dy && dy <= 32 )){
 				_allowedToPassThru = false;
 			}
 			else {

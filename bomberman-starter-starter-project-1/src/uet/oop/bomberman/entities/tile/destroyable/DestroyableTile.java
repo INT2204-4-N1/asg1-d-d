@@ -30,9 +30,6 @@ public class DestroyableTile extends Tile {
 				remove();
 		}
 	}
-	public boolean is_destroyed(){
-		return _destroyed;
-	}
 
 	public void destroy() {
 
