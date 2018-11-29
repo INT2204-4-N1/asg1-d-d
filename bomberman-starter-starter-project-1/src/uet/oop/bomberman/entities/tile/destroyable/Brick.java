@@ -1,6 +1,8 @@
 package uet.oop.bomberman.entities.tile.destroyable;
 
 
+import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.bomb.Flame;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.level.Coordinates;
@@ -15,7 +17,14 @@ public class Brick extends DestroyableTile {
 	public void update() {
 		super.update();
 	}
-	
+	@Override
+	public boolean collide(Entity e) {
+		// TODO: xử lý khi va chạm với Flame
+		if( e instanceof Flame){
+			destroy();
+		}
+		return false;
+	}
 	@Override
 	public void render(Screen screen) {
 		int x = Coordinates.tileToPixel(_x);

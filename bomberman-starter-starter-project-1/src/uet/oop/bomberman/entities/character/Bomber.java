@@ -6,11 +6,13 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.bomb.Bomb;
 import uet.oop.bomberman.entities.bomb.Flame;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
+import uet.oop.bomberman.entities.tile.item.Item;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.input.Keyboard;
 import uet.oop.bomberman.level.Coordinates;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class Bomber extends Character {
      * cứ mỗi lần đặt 1 Bomb mới, giá trị này sẽ được reset về 0 và giảm dần trong mỗi lần update()
      */
     protected int _timeBetweenPutBombs = 0;
+    public static List<Item> _itemp = new ArrayList<Item>();
 
     public Bomber(int x, int y, Board board) {
         super(x, y, board);
@@ -199,6 +202,12 @@ public class Bomber extends Character {
         }
 
         return true;
+    }
+    public void addItem(Item i) {
+        if(i.isRemoved()) return;
+
+        _itemp.add(i);
+        i.setValues();
     }
 
     private void chooseSprite() {

@@ -30,7 +30,7 @@ public class Game extends Canvas {
 	public static final int TIME = 200;
 	public static final int POINTS = 0;
 	
-	protected static int SCREENDELAY = 3;
+	protected static int SCREENDELAY = 1;
 
 	protected static int bombRate = BOMBRATE;
 	protected static int bombRadius = BOMBRADIUS;

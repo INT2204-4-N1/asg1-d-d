@@ -63,17 +63,14 @@ public class FileLevelLoader extends LevelLoader {
 				_map[i-1][j] = a[i].charAt(j);
 			}
 		}
-		System.out.println(_level+" " + _height+" "+_width);
+		/*System.out.println(_level+" " + _height+" "+_width);
 		for(int i=0;i<_height;i++){
 			for(int j=0;j<_width;j++){
 				System.out.print(_map[i][j]);
 			}
 			System.out.println();
-		}
-
-
+		}*/
 	}
-
 
 	@Override
 	public void createEntities() {
