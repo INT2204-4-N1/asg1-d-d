@@ -40,4 +40,5 @@ public class FlameItem extends Item {
 		return false;
 	}
 
+
 }

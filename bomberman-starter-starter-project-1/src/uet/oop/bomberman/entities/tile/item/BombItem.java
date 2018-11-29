@@ -29,7 +29,7 @@ public class BombItem extends Item {
 	public void setValues() {
 		_active = true;
 		Game.addBombRate(1);
-        test ds = new test();
+		test ds = new test();
 		Timer timer = new Timer();
 		timer.schedule(ds,25000);
 	}
