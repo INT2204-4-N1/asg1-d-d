@@ -1,6 +1,7 @@
 package uet.oop.bomberman.entities.tile.item;
 
 import uet.oop.bomberman.Game;
+import uet.oop.bomberman.GameSound;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
@@ -35,6 +36,7 @@ public class FlameItem extends Item {
 		if(e instanceof Bomber) {
 			((Bomber) e).addItem(this);
 			remove();
+			GameSound.getIstance().getAudio(GameSound.ITEM).play();
 			return true;
 		}
 		return false;

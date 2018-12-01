@@ -114,6 +114,9 @@ public class Board implements IRender {
 		_screenToShow = 1;
 		_game.resetScreenDelay();
 		_game.pause();
+		GameSound.getIstance().getAudio(GameSound.PLAYGAME).stop();
+		GameSound.getIstance().getAudio(GameSound.END).play();
+
 	}
 	
 	public boolean detectNoEnemies() {

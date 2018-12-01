@@ -22,6 +22,8 @@ public class Portal extends Tile {
 
 			if (e.getXTile() == getX() && e.getYTile() == getY()) {
 				if (board.detectNoEnemies())
+//					GameSound.getIstance().getAudio(GameSound.END).stop();
+//					GameSound.getIstance().getAudio(GameSound.WIN).play();
 					board.endGame();
 			}
 

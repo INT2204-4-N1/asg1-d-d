@@ -2,7 +2,7 @@ package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
-import uet.oop.bomberman.Sound_cdjv;
+import uet.oop.bomberman.GameSound;
 import uet.oop.bomberman.entities.AnimatedEntitiy;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
@@ -20,7 +20,7 @@ public class Bomb extends AnimatedEntitiy {
 	protected Flame[] _flames;
 	protected boolean _exploded = false;
 	protected boolean _allowedToPassThru = true;
-	Sound_cdjv a ;
+
 	public Bomb(int x, int y, Board board) {
 		_x = x;
 		_y = y;
@@ -32,13 +32,18 @@ public class Bomb extends AnimatedEntitiy {
 		if(_timeToExplode > 0) 
 			_timeToExplode--;
 		else {
-			if(!_exploded) 
+			if(!_exploded) {
 				explode();
-			else
+
+			}
+			else {
 				updateFlames();
-			
-			if(_timeAfter > 0) 
+
+			}
+			if(_timeAfter > 0) {
 				_timeAfter--;
+
+			}
 			else
 				remove();
 		}
@@ -52,10 +57,10 @@ public class Bomb extends AnimatedEntitiy {
 
 			_sprite =  Sprite.bomb_exploded2;
 			renderFlames(screen);
-			//a.resume();
+
 		} else
 			_sprite = Sprite.movingSprite(Sprite.bomb, Sprite.bomb_1, Sprite.bomb_2, _animate, 60);
-		
+
 		int xt = (int)_x << 4;
 		int yt = (int)_y << 4;
 
@@ -67,18 +72,12 @@ public class Bomb extends AnimatedEntitiy {
 		for (int i = 0; i < _flames.length; i++) {
 			_flames[i].render(screen);
 		}
-		a = new Sound_cdjv("bomno.wav");
-		//a.start();
-		//a.resume();
-
 	}
 	
 	public void updateFlames() {
 		for (int i = 0; i < _flames.length; i++) {
 			_flames[i].update();
 		}
-		//a.suspend();
-
 
 	}
 
@@ -99,6 +98,8 @@ public class Bomb extends AnimatedEntitiy {
 		for(int i=0;i<_flames.length;i++){
 			_flames[i] = new Flame((int) _x , (int) _y,i, Game.getBombRadius(),_board);
 		}
+
+		GameSound.getIstance().getAudio(GameSound.BONG_BANG).play();
 	}
 
 	public FlameSegment flameAt(int x, int y) {

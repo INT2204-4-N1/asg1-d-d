@@ -109,8 +109,6 @@ public class Game extends Canvas {
 	}
 	
 	public void start() {
-		Sound_cdjv sound_cdjv = new Sound_cdjv("nhac_nen.wav") ;
-		sound_cdjv.start();
 
 		_running = true;
 		long  lastTime = System.nanoTime();

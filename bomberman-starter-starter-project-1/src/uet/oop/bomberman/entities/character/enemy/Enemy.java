@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities.character.enemy;
 
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
+import uet.oop.bomberman.GameSound;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.Message;
 import uet.oop.bomberman.entities.bomb.Flame;
@@ -139,10 +140,12 @@ public abstract class Enemy extends Character {
 		// TODO: xử lý va chạm với Bomber
 		if(e instanceof Flame){
 			kill();
+			GameSound.getIstance().getAudio(GameSound.MONSTER_DIE).play();
 			return false;
 		}
 		if(e instanceof Bomber){
 			((Bomber)e).kill();
+			GameSound.getIstance().getAudio(GameSound.BOMBER_DIE).play();
 			return false;
 		}
 		return true;
