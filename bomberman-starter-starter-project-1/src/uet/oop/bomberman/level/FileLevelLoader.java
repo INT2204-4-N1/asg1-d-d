@@ -92,7 +92,7 @@ public class FileLevelLoader extends LevelLoader {
                         break;
                     case 'x':
                         _board.addEntity(pos,new LayeredEntity(x,y,new Grass(x,y,Sprite.grass)
-																	,new Portal(x,y,Sprite.portal),
+																	,new Portal(x,y,_board,Sprite.portal),
                                                                         new Brick(x,y,Sprite.brick)));
                         break;
                     case 'p':
