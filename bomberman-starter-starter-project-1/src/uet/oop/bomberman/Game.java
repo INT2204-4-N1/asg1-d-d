@@ -109,8 +109,10 @@ public class Game extends Canvas {
 	}
 	
 	public void start() {
+		Sound_cdjv sound_cdjv = new Sound_cdjv("nhac_nen.wav") ;
+		sound_cdjv.start();
+
 		_running = true;
-		
 		long  lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
 		final double ns = 1000000000.0 / 60.0; //nanosecond, 60 frames per second

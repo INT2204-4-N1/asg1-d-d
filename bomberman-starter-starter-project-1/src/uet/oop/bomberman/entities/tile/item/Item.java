@@ -11,7 +11,7 @@ public abstract class Item extends Tile {
 		super(x, y, sprite);
 	}
 	public abstract void setValues();
-	public void Stopitem(){
-		_active = false;
-	}
+//	public void Stopitem(){
+//		_active = false;
+//	}
 }
