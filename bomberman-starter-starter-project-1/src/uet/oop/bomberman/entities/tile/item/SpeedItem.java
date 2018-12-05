@@ -33,7 +33,7 @@ public class SpeedItem extends Item {
 		Game.addBomberSpeed(1.0);
 		test ds = new test();
 		Timer timer = new Timer();
-		timer.schedule(ds,25000);
+		timer.schedule(ds,10000);
 	}
 	class test extends TimerTask {
 		@Override

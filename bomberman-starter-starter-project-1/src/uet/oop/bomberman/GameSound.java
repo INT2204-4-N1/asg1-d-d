@@ -43,12 +43,9 @@ public class GameSound {
     }
     public void stop() {
         getAudio(PLAYGAME).stop();
-//        getAudio(PLAY).stop();
-//        getAudio(MENU).stop();
-//
-//        getAudio(BOMB).stop();
+
         getAudio(BONG_BANG).stop();
-//        getAudio(WIN).stop();
+
         getAudio(END).stop();
     }
 
